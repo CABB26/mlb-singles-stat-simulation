@@ -32,4 +32,3 @@ Source: MLB Stats API schedule and game boxscores at https://statsapi.mlb.com/ap
 This is a transparent baseline, not a validated forecasting model. It omits pitcher quality, handedness, park, weather, injury status and variable playing time. Ranking three players does not imply that any will homer. A validation upgrade should store pregame snapshots and evaluate calibration, Brier score, and top-three hit rate on future games before making accuracy claims.
 
 MLB data usage is subject to its terms: http://gdx.mlb.com/components/copyright.txt. Not affiliated with MLB.
-
