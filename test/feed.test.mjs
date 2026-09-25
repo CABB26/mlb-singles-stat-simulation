@@ -8,10 +8,11 @@ test('feed excludes started games, respects posted lineups, and reports failed g
   const order=Array.from({length:9},(_,i)=>i+1);
   globalThis.fetch=async url=>{
     if(url.includes('/schedule')) return Response.json({dates:[{games:[game(1,'P'),game(2,'I'),game(3,'F'),game(4,'S')]}]});
+    if(url.includes('/stats?'))return Response.json({stats:[{totalSplits:11,splits:Array.from({length:11},(_,i)=>({player:{id:i+1},stat:{homeRuns:25,plateAppearances:450}}))}]});
     if(url.includes('/game/4/')) return new Response('',{status:503});
     assert.ok(url.includes('/game/1/'));
     return Response.json({teams:{away:{battingOrder:order,players:Object.fromEntries([...order,10].map(id=>[id,player(id)]))},home:{battingOrder:[],players:{11:player(11)}}}});
   };
-  try {const data=await slate();assert.equal(data.games,2);assert.equal(data.players.length,10);assert.equal(data.players.filter(p=>p.confirmed).length,9);assert.equal(data.warnings.length,1);assert.ok(!data.players.some(p=>p.id===10));}
+  try {const data=await slate();assert.equal(data.games,2);assert.equal(data.players.length,10);assert.equal(data.players[0].hr,25);assert.equal(data.players[0].pa,450);assert.equal(data.players.filter(p=>p.confirmed).length,9);assert.equal(data.warnings.length,1);assert.ok(!data.players.some(p=>p.id===10));}
   finally {globalThis.fetch=original;}
 });
