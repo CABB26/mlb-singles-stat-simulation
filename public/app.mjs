@@ -1,6 +1,6 @@
 import {importCSV,applyImports} from './imports.mjs';
 const $=id=>document.getElementById(id);
-const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pct=n=>Number.isFinite(Number(n))?(Number(n)*100).toFixed(1)+'%':'n/a';
 const metric=(n,suffix='')=>Number.isFinite(n)?n.toFixed(1)+suffix:'n/a';
 const mult=n=>Number.isFinite(n)?'×'+n.toFixed(2):'×1.00';
